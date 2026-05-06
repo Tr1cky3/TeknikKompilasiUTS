@@ -51,11 +51,12 @@ class MiniCompiler:
 
     def term(self):
         # TUGAS 3: Hubungkan hierarki ke self.power()
-        node = self.factor() # Ubah ini
+        node = self.power() # Diubah dari self.factor() menjadi self.power()
         while self._current in ('*', '/'):
             op = self._current
             self.advance()
-            node = BinOp(left=node, op=op, right=self.factor()) # Dan sesuaikan pemanggilan kanannya
+            # Pemanggilan sisi kanan juga disesuaikan menjadi self.power()
+            node = BinOp(left=node, op=op, right=self.power()) 
         return node
 
     def expr(self):
