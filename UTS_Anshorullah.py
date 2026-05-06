@@ -2,8 +2,8 @@ import re
 
 class MiniCompiler:
     def __init__(self, source, env):
-        # TUGAS 1: Menambahkan '^' ke dalam regex
-        self._tokens = iter(re.findall(r'[a-zA-Z_]\w*|\d+(?:\.\d+)?|[+*/()\-\^]', source) + ['?'])
+        # TUGAS 1: Perbarui regex di bawah ini agar mengenali simbol '^'
+        self._tokens = iter(re.findall(r'[a-zA-Z_]\w*|\d+(?:\.\d+)?|[+*/()\-]', source) + ['?'])
         self._current = None
         self._env = env 
         self._temp_count = 0
@@ -44,20 +44,15 @@ class MiniCompiler:
     def power(self):
         node = self.factor()
         # Tulis logika perulangan while untuk '^' di sini
-        while self._current == '^':
-            op = self._current
-            self.advance()
-            node = BinOp(left=node, op=op, right=self.factor())
         return node
 
     def term(self):
         # TUGAS 3: Hubungkan hierarki ke self.power()
-        node = self.power() # Diubah dari self.factor() menjadi self.power()
+        node = self.factor() # Ubah ini
         while self._current in ('*', '/'):
             op = self._current
             self.advance()
-            # Pemanggilan sisi kanan juga disesuaikan menjadi self.power()
-            node = BinOp(left=node, op=op, right=self.power()) 
+            node = BinOp(left=node, op=op, right=self.factor()) # Dan sesuaikan pemanggilan kanannya
         return node
 
     def expr(self):
