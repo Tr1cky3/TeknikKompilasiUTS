@@ -2,8 +2,8 @@ import re
 
 class MiniCompiler:
     def __init__(self, source, env):
-        # TUGAS 1: Perbarui regex di bawah ini agar mengenali simbol '^'
-        self._tokens = iter(re.findall(r'[a-zA-Z_]\w*|\d+(?:\.\d+)?|[+*/()\-]', source) + ['?'])
+        # TUGAS 1: Menambahkan '^' ke dalam regex
+        self._tokens = iter(re.findall(r'[a-zA-Z_]\w*|\d+(?:\.\d+)?|[+*/()\-\^]', source) + ['?'])
         self._current = None
         self._env = env 
         self._temp_count = 0
