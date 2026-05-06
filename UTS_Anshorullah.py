@@ -39,11 +39,14 @@ class MiniCompiler:
             return node
         raise ParserError(f"Unexpected token: {token}")
 
-    # TUGAS 2: Implementasikan fungsi power()
-    # Gunakan pola yang sama dengan term(), namun untuk operator '^'
+    # TUGAS 2: Implementasi fungsi power()
     def power(self):
         node = self.factor()
-        # Tulis logika perulangan while untuk '^' di sini
+        # Logika perulangan while untuk operator pangkat '^'
+        while self._current == '^':
+            op = self._current
+            self.advance()
+            node = BinOp(left=node, op=op, right=self.factor())
         return node
 
     def term(self):
