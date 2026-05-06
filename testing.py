@@ -1,4 +1,4 @@
-from compiler import MiniCompiler  # Mengimpor class dari file py utama
+from UTS_Anshorullah import MiniCompiler  # Mengimpor class dari file py utama
 
 source_code = "a ^ 2 + b * c"
 symbol_table = {'a': 5, 'b': 10, 'c': 2}
